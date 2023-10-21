@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import {
+  resetHandler,
+  decrementHandler,
+  fazetelincrement,
+} from "./redux/actions";
 
 function App() {
+  const dispatch = useDispatch();
+  const handleIncrement = () => {
+    dispatch(fazetelincrement());
+  };
+  const handleDecrement = () => {
+    dispatch(decrementHandler());
+  };
+  const handleReset = () => {
+    dispatch(resetHandler());
+  };
+  const counter = useSelector((state)=>state.counter)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button style={{border:'0', borderRadius:'10px', padding:"10px"}} onClick={handleIncrement}>+</button>
+      <button style={{border:'0',borderRadius:'10px', padding:"10px"}} onClick={handleDecrement}>-</button>
+      <button style={{ backgroundColor:'green', border:'0',borderRadius:'10px',padding:"10px"}}>{counter}</button>
+      <button style={{border:'0',borderRadius:'10px',padding:"10px"}} onClick={handleReset}>RESET</button>
     </div>
   );
 }
